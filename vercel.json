@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/fiat.js": {
+      "includeFiles": "gcloud-credentials.json"
+    }
+  }
+}
