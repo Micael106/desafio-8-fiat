@@ -125,7 +125,6 @@ module.exports = async (req, res) => {
 
   console.log("car: ", car);
   console.log("text: ", text);
-  console.log("audio: ", audio);
 
   if (!car && (!audio || !text))
     throw new Error("No car and audio or text received");
@@ -137,12 +136,9 @@ module.exports = async (req, res) => {
   const { entities } = result;
 
   // caso nenhuma entidade seja encontrado no text
-  if (
-    (!entities ||
-      entities.length === 0 ||
-      entities.reduce((acc, ett) => acc + ett.sentiment.score) >= 0,
-    0)
-  ) {
+  const check = entities.reduce((acc, ett) => acc + ett.sentiment.score, 0);
+  console.log(check, entities);
+  if (!entities || entities.length === 0 || check >= 0) {
     res.json({
       recommendation: "",
       entities: [],
